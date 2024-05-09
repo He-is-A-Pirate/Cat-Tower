@@ -30,7 +30,7 @@ class Likes(
     val comment: Comment?,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "commentId")
+    @JoinColumn(name = "SubCommentId")
     val subComment: SubComment?
 
 ) : BaseTimeEntity() {
