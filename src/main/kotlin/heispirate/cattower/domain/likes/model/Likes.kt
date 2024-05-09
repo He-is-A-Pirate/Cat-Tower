@@ -1,6 +1,7 @@
 package heispirate.cattower.domain.likes.model
 
 import heispirate.cattower.domain.comment.model.Comment
+import heispirate.cattower.domain.comment.model.SubComment
 import heispirate.cattower.domain.petProfile.model.PetProfile
 import heispirate.cattower.domain.post.model.Post
 import heispirate.cattower.infra.BaseTimeEntity
@@ -18,15 +19,19 @@ import jakarta.persistence.Table
 class Likes(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "postId")
-    val post :Post?,
-    //TODO SubComment와 연결
+    val post: Post?,
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "petProfileId")
     val petProfile: PetProfile,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "commentId")
-    val comment :Comment?
+    val comment: Comment?,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "commentId")
+    val subComment: SubComment?
 
 ) : BaseTimeEntity() {
     @Id
