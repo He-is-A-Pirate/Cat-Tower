@@ -28,7 +28,6 @@ class ChatRoom(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "chat_room_id")
     var id: Long? = null
 
 }
