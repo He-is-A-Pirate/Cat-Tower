@@ -42,25 +42,30 @@ class LevelServiceImpl(private val mainUserRepository: MainUserRepository) : Lev
     private fun levelUp(exp: Int, userId: Long) : LevelResponseDTO? {
         val user = mainUserRepository.findByIdOrNull(userId) ?: throw ModelNotFoundException("mainUser", userId)
 
-        val maxLevel = 100
+        val maxLevel = 50
         val initialExp = 10
 
         val levelUpMap = mutableMapOf<Int,Int>()
         var expRequired = initialExp
 
-        for (level in 1..maxLevel) {
+        for (level in 0..maxLevel) {
             levelUpMap[level] = expRequired
             expRequired += expRequired / 2
         }
 
         val currentLevel = user.level
-        val requiredExp = levelUpMap[currentLevel] ?: return null
+        var requiredExp = levelUpMap[currentLevel] ?: return null
 
-        if (user.experience >= requiredExp) {
+        while (user.experience >= requiredExp && user.level < maxLevel) {
+            requiredExp = levelUpMap[user.level + 1] ?: break
             user.level++
-            return LevelResponseDTO.fromMainUser(user)
         }
-        return null
+
+        return if (user.level > currentLevel) {
+            LevelResponseDTO.fromMainUser(user)
+        } else {
+            null
+        }
     }
 
     private fun levelDown(exp: Int, userId: Long) : LevelResponseDTO? {
