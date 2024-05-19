@@ -77,4 +77,62 @@ class ExpTest @Autowired constructor(private val mainUserRepository: MainUserRep
         result.todayExperience shouldBe 200
         result.level shouldBe 8
     }
+
+    @Test
+    fun userExpDecreaseTest() {
+        // given
+        val userId = 1L
+        val user = MainUser(
+            todayExperience = 50,
+            experience = 100,
+            level = 6,
+            aboutMe = null,
+            email = "zzz",
+            nickname = "zzzz",
+            password = "1234",
+            phoneNumber = "12345",
+            providerId = "kakao",
+            provider = "ka"
+        )
+        mainUserRepository.saveAndFlush(user)
+        val expToLose = 50
+
+        // when
+        levelService.loseExp(expToLose, userId)
+        val result = mainUserRepository.findByIdOrNull(userId) ?: throw Exception("user 미확인")
+
+        // then
+        result.experience shouldBe 50
+        result.todayExperience shouldBe 0
+        result.level shouldBe 5
+    }
+
+    @Test
+    fun userExpDecreaseNoLevelDownTest() {
+        // given
+        val userId = 1L
+        val user = MainUser(
+            todayExperience = 50,
+            experience = 100,
+            level = 6,
+            aboutMe = null,
+            email = "zzz",
+            nickname = "zzzz",
+            password = "1234",
+            phoneNumber = "12345",
+            providerId = "kakao",
+            provider = "ka"
+        )
+        mainUserRepository.saveAndFlush(user)
+        val expToLose = 20
+
+        // when
+        levelService.loseExp(expToLose, userId)
+        val result = mainUserRepository.findByIdOrNull(userId) ?: throw Exception("user 미확인")
+
+        // then
+        result.experience shouldBe 80
+        result.todayExperience shouldBe 30
+        result.level shouldBe 6
+    }
 }
