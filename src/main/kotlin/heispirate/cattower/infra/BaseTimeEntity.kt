@@ -2,6 +2,9 @@ package heispirate.cattower.infra
 
 import jakarta.persistence.Column
 import jakarta.persistence.EntityListeners
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
+import jakarta.persistence.Id
 import jakarta.persistence.MappedSuperclass
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
@@ -23,4 +26,8 @@ abstract class BaseTimeEntity {
 
     @Column(nullable = true)
     var deletedAt: LocalDateTime? = null
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long? = null
 }
