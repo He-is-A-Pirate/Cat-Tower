@@ -29,8 +29,8 @@ class SwaggerConfig {
             )
             .info(
                 Info()
-                    .title("CatTower API")
-                    .description("CatTower API schema")
+                    .title("MoaMoa API")
+                    .description("MoaMoa API schema")
                     .version("1.0.0"),
             )
     }
