@@ -2,7 +2,7 @@ package heispirate.cattower.domain.chat.model
 
 import heispirate.cattower.domain.mainUser.model.MainUser
 import heispirate.cattower.domain.post.model.Post
-import heispirate.cattower.infra.BaseTimeEntity
+import heispirate.cattower.infra.BaseEntity
 import jakarta.persistence.Entity
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
@@ -25,10 +25,6 @@ class ChatRoom(
     @JoinColumn(name = "post", updatable = false)
     val post: Post,
 
-    ):BaseTimeEntity() {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null
+    ):BaseEntity() {
 
 }
