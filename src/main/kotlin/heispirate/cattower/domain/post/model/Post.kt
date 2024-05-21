@@ -34,6 +34,10 @@ class Post(
     @Column(name = "category")
     var category : Category,
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "subCategory")
+    var subCategory: SubCategory,
+
     @Column(name = "writer")
     val writer : String,
 
