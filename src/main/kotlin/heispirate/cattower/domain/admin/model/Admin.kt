@@ -4,6 +4,8 @@ import heispirate.cattower.domain.mainUser.model.MainUser
 import heispirate.cattower.infra.BaseEntity
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
 import jakarta.persistence.FetchType
 import jakarta.persistence.OneToOne
 import jakarta.persistence.Table
@@ -12,12 +14,13 @@ import jakarta.persistence.Table
 @Entity
 class Admin(
 
-    @Column(name = "role")
-    var role : String,
+    @Enumerated(EnumType.STRING)
+    @Column(name = "category")
+    var role: Role,
 
     @OneToOne(fetch = FetchType.LAZY)
     val mainUser: MainUser,
 
-):BaseEntity() {
+    ):BaseEntity() {
 
 }
