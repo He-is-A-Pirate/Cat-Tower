@@ -1,4 +1,4 @@
-package heispirate.cattower.domain.post.model
+package heispirate.cattower.infra.category
 
 enum class Category {
     DAILY_LIFE, // 일상
