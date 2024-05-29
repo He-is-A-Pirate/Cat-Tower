@@ -30,6 +30,9 @@ class Comment(
     @JoinColumn(name = "petProfileId")
     val petProfile: PetProfile,
 
+    @Column(name = "category")
+    val category : String,
+
 ) : BaseEntity() {
 
 }
