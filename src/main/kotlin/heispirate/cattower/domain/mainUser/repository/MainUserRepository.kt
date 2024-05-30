@@ -4,4 +4,5 @@ import heispirate.cattower.domain.mainUser.model.MainUser
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface MainUserRepository : JpaRepository<MainUser,Long> , CustomMainUserRepository {
+    fun existsByEmail(email: String):Boolean
 }
