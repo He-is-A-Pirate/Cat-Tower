@@ -17,7 +17,7 @@ class MainUserServiceImpl(
         if(mainUserRepository.existsByEmail(signUpRequestDTO.email)) throw Exception("이미 가입된 이메일입니다.")
 
         val user = MainUser(
-            nickname = signUpRequestDTO.nickName,
+            nickname = signUpRequestDTO.nickname,
             email = signUpRequestDTO.email,
             password = signUpRequestDTO.password,
             aboutMe = signUpRequestDTO.aboutMe,
