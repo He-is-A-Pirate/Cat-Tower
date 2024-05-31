@@ -4,7 +4,9 @@ import heispirate.cattower.domain.mainUser.dto.MainUserResponseDTO
 import heispirate.cattower.domain.mainUser.dto.SingUpRequestDTO
 import heispirate.cattower.domain.mainUser.model.MainUser
 import heispirate.cattower.domain.mainUser.repository.MainUserRepository
+import heispirate.cattower.exception.ModelNotFoundException
 import jakarta.transaction.Transactional
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 
 @Service
@@ -29,6 +31,11 @@ class MainUserServiceImpl(
             providerId = null
         )
         mainUserRepository.save(user)
+    }
+
+    override fun getUser(userId: Long): MainUserResponseDTO {
+        val user = mainUserRepository.findByIdOrNull(userId) ?: throw ModelNotFoundException("userId",userId)
+        return MainUserResponseDTO.fromMainUser(user)
     }
 }
 //로그인할때 그냥 경험치증가로직 가져와서 숫자만 만져주기 끝

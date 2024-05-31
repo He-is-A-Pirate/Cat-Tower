@@ -7,4 +7,6 @@ interface MainUserService {
     fun signUp(
         signUpRequestDTO: SingUpRequestDTO
     )
+
+    fun getUser(userId:Long):MainUserResponseDTO
 }
