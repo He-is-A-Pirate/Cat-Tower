@@ -33,7 +33,7 @@ class AdminRoleTest @Autowired constructor(
     private val petProfileRepository: PetProfileRepository,
 ) {
 
-    private val adminService = AdminServiceImpl(adminRepository)
+    private val adminService = AdminServiceImpl(adminRepository,mainUserRepository)
 
     @BeforeEach
     fun setUp() {
