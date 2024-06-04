@@ -2,8 +2,12 @@ package heispirate.cattower.domain.comment.model
 
 import heispirate.cattower.domain.petProfile.model.PetProfile
 import heispirate.cattower.infra.BaseEntity
+import heispirate.cattower.infra.category.Category
+import heispirate.cattower.infra.category.CategoryInterface
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
 import jakarta.persistence.FetchType
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
@@ -29,6 +33,10 @@ class SubComment(
     @JoinColumn(name = "petProfileId")
     val petProfile: PetProfile,
 
-    ) : BaseEntity() {
+    @Enumerated(EnumType.STRING)
+    @Column(name = "category")
+    override var category: Category
+
+) : BaseEntity(), CategoryInterface {
 
 }
