@@ -6,11 +6,10 @@ import net.nurigo.sdk.message.model.Message
 import net.nurigo.sdk.message.request.SingleMessageSendingRequest
 import net.nurigo.sdk.message.response.SingleMessageSentResponse
 import net.nurigo.sdk.message.service.DefaultMessageService
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class SMSServiceImpl @Autowired constructor(
+class SMSServiceImpl(
     private val messageService: DefaultMessageService,
     private val smsRepository: SMSRepository
 ) : SMSService {
