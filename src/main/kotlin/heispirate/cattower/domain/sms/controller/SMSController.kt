@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController
 
 
 @RestController
-class SMSController @Autowired constructor(
+class SMSController(
     private val smsService: SMSService
 ) {
 
