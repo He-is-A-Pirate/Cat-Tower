@@ -8,6 +8,7 @@ import heispirate.cattower.domain.admin.repository.AdminRepository
 import heispirate.cattower.domain.mainUser.repository.MainUserRepository
 import heispirate.cattower.domain.petProfile.model.PetProfile
 import heispirate.cattower.domain.post.model.Post
+import heispirate.cattower.exception.ModelNotFoundException
 import heispirate.cattower.infra.category.Category
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -43,9 +44,24 @@ class AdminServiceImpl(
     }
 
     @Transactional
-    override fun signInAdmin() {
-        //TODO : 카카오톡 알림 시스템을 이용하여 인증 계획중...
-        //TODO : 카카오톡 알림문자 수신  -> 인증번호 입력 -> 이 과정을 통과하면 admin기능 활성화 ...?
+    override fun signInAdmin(request: AdminRequestDTOver1) {
+        val admin = adminRepository.findByMainUserEmail(request.adminEmail) ?: throw IllegalArgumentException("이메일을 찾을수 없습니다")
+    }
+
+    override fun updateAdmin(email: String): AdminResponseDTO {
+        TODO("Not yet implemented")
+    }
+
+    override fun deleteAdmin(email: String): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun getAdmin(email: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun getAllAdmin() {
+        TODO("Not yet implemented")
     }
 
     // 예시 적용을 위한 펫 프로필 확인
