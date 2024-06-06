@@ -9,7 +9,9 @@ interface MainUserService {
         signUpRequestDTO: SingUpRequestDTO
     )
 
-    fun getUser(userId:Long):MainUserResponseDTO
+    fun getUser(userId: Long): MainUserResponseDTO
 
-    fun updateUser(userId: Long,mainUserRequestDTO: MainUserRequestDTO):MainUserResponseDTO
+    fun updateUser(userId: Long, mainUserRequestDTO: MainUserRequestDTO): MainUserResponseDTO
+
+
 }
