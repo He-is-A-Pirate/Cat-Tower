@@ -1,6 +1,8 @@
 package heispirate.cattower.domain.mainUser.dto
 
-//data class MainUserRequestDTO(
-//    val
-//    //TODO 필요한 것 채워넣기
-//)
+data class MainUserRequestDTO(
+    val nickname: String,
+    val password: String,
+    val aboutMe: String,
+    val phoneNumber: String,
+)

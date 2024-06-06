@@ -1,5 +1,6 @@
 package heispirate.cattower.domain.mainUser.service
 
+import heispirate.cattower.domain.mainUser.dto.MainUserRequestDTO
 import heispirate.cattower.domain.mainUser.dto.MainUserResponseDTO
 import heispirate.cattower.domain.mainUser.dto.SingUpRequestDTO
 import heispirate.cattower.domain.mainUser.model.MainUser
@@ -35,6 +36,19 @@ class MainUserServiceImpl(
 
     override fun getUser(userId: Long): MainUserResponseDTO {
         val user = mainUserRepository.findByIdOrNull(userId) ?: throw ModelNotFoundException("userId",userId)
+        return MainUserResponseDTO.fromMainUser(user)
+    }
+
+
+    override fun updateUser(userId: Long,mainUserRequestDTO: MainUserRequestDTO): MainUserResponseDTO {
+        val user = mainUserRepository.findByIdOrNull(userId) ?: throw ModelNotFoundException("userId",userId)
+
+        user.nickname = mainUserRequestDTO.nickname
+        user.password = mainUserRequestDTO.password
+        user.aboutMe = mainUserRequestDTO.aboutMe
+        user.phoneNumber = mainUserRequestDTO.phoneNumber
+
+        mainUserRepository.save(user)
         return MainUserResponseDTO.fromMainUser(user)
     }
 }
