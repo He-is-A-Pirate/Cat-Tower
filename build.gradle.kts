@@ -40,6 +40,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.springframework.boot:spring-boot-starter-aop")
     implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("net.nurigo:sdk:4.3.0") //SMS
 
     //h2
     implementation("com.h2database:h2")
