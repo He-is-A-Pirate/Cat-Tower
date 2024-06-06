@@ -1,5 +1,7 @@
 package heispirate.cattower.domain.post.model
 
+import heispirate.cattower.infra.category.Category
+
 enum class SubCategory(val category: Category) {
     // DailyLife
     GOOD_THINGS(Category.DAILY_LIFE), // 좋은일

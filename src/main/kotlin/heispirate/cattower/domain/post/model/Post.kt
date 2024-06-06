@@ -2,6 +2,8 @@ package heispirate.cattower.domain.post.model
 
 import heispirate.cattower.domain.petProfile.model.PetProfile
 import heispirate.cattower.infra.BaseEntity
+import heispirate.cattower.infra.category.Category
+import heispirate.cattower.infra.category.CategoryInterface
 import jakarta.persistence.CollectionTable
 import jakarta.persistence.Column
 import jakarta.persistence.ElementCollection
@@ -32,7 +34,7 @@ class Post(
 
     @Enumerated(EnumType.STRING)
     @Column(name = "category")
-    var category : Category,
+    override var category : Category,
 
     @Enumerated(EnumType.STRING)
     @Column(name = "subCategory")
@@ -45,6 +47,6 @@ class Post(
     @JoinColumn(name = "petProfileId")
     val petProfile : PetProfile
 
-) : BaseEntity() {
+) : BaseEntity(), CategoryInterface {
 
 }
