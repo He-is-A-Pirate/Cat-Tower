@@ -13,5 +13,5 @@ interface MainUserService {
 
     fun updateUser(userId: Long, mainUserRequestDTO: MainUserRequestDTO): MainUserResponseDTO
 
-
+    fun deleteUser(userId: Long)
 }

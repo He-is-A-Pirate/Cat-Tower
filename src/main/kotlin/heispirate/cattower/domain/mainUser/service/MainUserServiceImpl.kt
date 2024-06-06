@@ -49,9 +49,18 @@ class MainUserServiceImpl(
         user.aboutMe = mainUserRequestDTO.aboutMe
         user.phoneNumber = mainUserRequestDTO.phoneNumber
 
-        mainUserRepository.save(user)
+        mainUserRepository.save(user)// 더티체크 공부 미흡
         return MainUserResponseDTO.fromMainUser(user)
     }
 
+    override fun deleteUser(userId: Long) {
+        val user = mainUserRepository.findByIdOrNull(userId) ?: throw ModelNotFoundException("userId",userId)
+        if (user.deletedAt == null){
+            user.deletedAt = LocalDateTime.now()
+            mainUserRepository.save(user)//더티체크 공부 미흡
+        }else{
+            throw Exception("삭제된 아이디 입니다")
+        }
+    }
 }
 //로그인할때 그냥 경험치증가로직 가져와서 숫자만 만져주기 끝

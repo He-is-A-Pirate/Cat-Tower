@@ -7,6 +7,4 @@ import org.springframework.data.jpa.repository.JpaRepository
 interface MainUserRepository : JpaRepository<MainUser,Long> , CustomMainUserRepository {
     fun existsByEmail(email: String):Boolean
 
-    fun findByEmail(email: String):MainUser?
-
 }

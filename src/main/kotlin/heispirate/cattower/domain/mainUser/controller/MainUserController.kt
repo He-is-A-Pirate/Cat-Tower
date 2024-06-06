@@ -43,6 +43,7 @@ class MainUserController(
             .body(mainUserService.getUser(userId))
     }//회원정보조회
     @PutMapping("/users/{userId}")
+    @Operation(summary = "회원정보수정", description = "회원정보 수정 기능")
     fun updateUser(@PathVariable userId: Long,
                    @RequestBody mainUserRequestDTO: MainUserRequestDTO
     ):ResponseEntity<MainUserResponseDTO>{
@@ -50,6 +51,15 @@ class MainUserController(
             .status(HttpStatus.OK)
             .body(mainUserService.updateUser(userId, mainUserRequestDTO))
     }//회원정보수정
-
+   @DeleteMapping("/users/{userId}")
+   @Operation(summary = "회원정보삭제", description = "회원정보 삭제 기능")
+   fun deleteUser(
+       @PathVariable userId: Long
+   ):ResponseEntity<Unit>{
+       mainUserService.deleteUser(userId)
+       return ResponseEntity
+           .status(HttpStatus.NO_CONTENT)
+           .build()
+   }
 
 }//회원정보 생성(가입) /조회 / 수정 / 삭제 / login
