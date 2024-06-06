@@ -43,11 +43,13 @@ class MainUserController(
             .body(mainUserService.getUser(userId))
     }//회원정보조회
     @PutMapping("/users/{userId}")
-    fun updateUser(@PathVariable userId: Long,mainUserRequestDTO: MainUserRequestDTO):ResponseEntity<MainUserResponseDTO>{
+    fun updateUser(@PathVariable userId: Long,
+                   @RequestBody mainUserRequestDTO: MainUserRequestDTO
+    ):ResponseEntity<MainUserResponseDTO>{
         return ResponseEntity
             .status(HttpStatus.OK)
             .body(mainUserService.updateUser(userId, mainUserRequestDTO))
     }//회원정보수정
-    
+
 
 }//회원정보 생성(가입) /조회 / 수정 / 삭제 / login
