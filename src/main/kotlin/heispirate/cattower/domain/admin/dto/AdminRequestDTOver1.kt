@@ -6,4 +6,5 @@ data class AdminRequestDTOver1(
     val role: Role,
     val adminEmail: String,
     val userEmail : String,
+    val verificationCode : String,
 )
