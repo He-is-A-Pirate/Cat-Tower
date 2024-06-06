@@ -52,7 +52,7 @@ class MainUserServiceImpl(
         mainUserRepository.save(user)// 더티체크 공부 미흡
         return MainUserResponseDTO.fromMainUser(user)
     }
-
+    @Transactional
     override fun deleteUser(userId: Long) {
         val user = mainUserRepository.findByIdOrNull(userId) ?: throw ModelNotFoundException("userId",userId)
         if (user.deletedAt == null){
