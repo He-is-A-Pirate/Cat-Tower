@@ -29,4 +29,8 @@ class PetProfileServiceImpl(
         val savedPetProfile = petProfileRepository.save(newPetProfile)
         return PetProfileResponseDTO.toResponse(savedPetProfile)
     }
+    override fun getPetProfile(petId: Long): PetProfileResponseDTO {
+        val petProfile = petProfileRepository.findByIdOrNull(petId) ?: throw ModelNotFoundException("pet", petId)
+        return PetProfileResponseDTO.toResponse(petProfile)
+    }
 }
