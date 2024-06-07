@@ -15,7 +15,7 @@ data class CreatePetProfileRequestDTO(
     val bloodType: String?,
     val weight: Double?,
     val healthHistory: String?,
-    val profileImageUrl: String?,
+    val profileImageUrl: String,
     val disclosure: Boolean,
 ) {
     fun toEntity(): PetProfile {
