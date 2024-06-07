@@ -5,6 +5,7 @@ import heispirate.cattower.domain.petProfile.dto.PetProfileResponseDTO
 import heispirate.cattower.domain.petProfile.service.PetProfileService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -24,6 +25,14 @@ class PetProfileController(
         return ResponseEntity
             .status(HttpStatus.OK)
             .body(petProfileService.createPetProfile(userId, createPetProfileRequestDTO))
+    }
+    @GetMapping("{petId}")
+    fun getPetProfile(
+        @PathVariable petId: Long
+    ): ResponseEntity<PetProfileResponseDTO> {
+        return ResponseEntity
+            .status(HttpStatus.OK)
+            .body(petProfileService.getPetProfile(petId))
     }
 
 
