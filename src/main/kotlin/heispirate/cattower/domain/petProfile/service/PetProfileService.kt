@@ -13,4 +13,6 @@ interface PetProfileService {
 
     fun updatePetProfile(userId: Long, petId: Long, petProfileRequestDTO: PetProfileRequestDTO): PetProfileResponseDTO
 
+    fun deletePetProfile(userId: Long, petId: Long)
+
 }
