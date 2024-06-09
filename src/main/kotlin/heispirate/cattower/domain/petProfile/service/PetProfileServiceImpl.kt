@@ -8,6 +8,7 @@ import heispirate.cattower.exception.ModelNotFoundException
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.time.LocalDateTime
 
 @Service
 class PetProfileServiceImpl(
@@ -67,5 +68,17 @@ class PetProfileServiceImpl(
             disclosure = petProfileRequestDTO.disclosure}
         val updatedPetProfile = petProfileRepository.save(petProfile)
         return PetProfileResponseDTO.toResponse(updatedPetProfile)
+    }
+
+    @Transactional
+    override fun deletePetProfile(userId: Long, petId: Long) {
+        val mainUser = mainUserRepository.findByIdOrNull(userId) ?: throw ModelNotFoundException("user", userId)
+        val petProfile = petProfileRepository.findByIdAndDeletedAtIsNull(petId) ?: throw ModelNotFoundException("pet", petId)
+        if (petProfile.mainUser != mainUser) {
+            throw Exception("해당 유저의 펫프로필이 아닙니다.")
+        }
+        petProfile.deletedAt = LocalDateTime.now()
+        petProfileRepository.save(petProfile)
+
     }
 }
