@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface MainUserRepository : JpaRepository<MainUser,Long> , CustomMainUserRepository {
     fun findByEmail(email: String): MainUser?
+
+    fun findByIdAndDeletedAtIsNull(userId: Long): MainUser?
 }
