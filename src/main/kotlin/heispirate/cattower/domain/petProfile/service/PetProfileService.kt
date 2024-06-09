@@ -11,4 +11,6 @@ interface PetProfileService {
 
     fun getUsersPetProfileList(userId: Long): List<PetProfileResponseDTO>
 
+    fun updatePetProfile(userId: Long, petId: Long, petProfileRequestDTO: PetProfileRequestDTO): PetProfileResponseDTO
+
 }
