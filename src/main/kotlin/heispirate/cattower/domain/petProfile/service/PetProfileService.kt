@@ -1,11 +1,13 @@
 package heispirate.cattower.domain.petProfile.service
 
-import heispirate.cattower.domain.petProfile.dto.CreatePetProfileRequestDTO
+import heispirate.cattower.domain.petProfile.dto.PetProfileRequestDTO
 import heispirate.cattower.domain.petProfile.dto.PetProfileResponseDTO
 
 interface PetProfileService {
-    fun createPetProfile(userId: Long, createPetProfileRequestDTO: CreatePetProfileRequestDTO
+    fun createPetProfile(userId: Long, petProfileRequestDTO: PetProfileRequestDTO
     ): PetProfileResponseDTO
 
-    fun getPetProfile(petId: Long): PetProfileResponseDTO
+    fun getPetProfile(userId: Long, petId: Long): PetProfileResponseDTO
+
+
 }
