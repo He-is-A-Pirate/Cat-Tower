@@ -9,5 +9,6 @@ interface PetProfileService {
 
     fun getPetProfile(userId: Long, petId: Long): PetProfileResponseDTO
 
+    fun getUsersPetProfileList(userId: Long): List<PetProfileResponseDTO>
 
 }
