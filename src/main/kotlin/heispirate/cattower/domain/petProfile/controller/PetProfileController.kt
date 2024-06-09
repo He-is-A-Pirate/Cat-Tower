@@ -5,6 +5,7 @@ import heispirate.cattower.domain.petProfile.dto.PetProfileResponseDTO
 import heispirate.cattower.domain.petProfile.service.PetProfileService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -54,6 +55,14 @@ class PetProfileController(
         return ResponseEntity
             .status(HttpStatus.OK)
             .body(petProfileService.updatePetProfile(userId, petId, petProfileRequestDTO))
+    }
+
+    @DeleteMapping("/{petId}")
+    fun deletePetProfile(
+        @PathVariable userId: Long,
+        @PathVariable petId: Long
+    ): ResponseEntity<Unit> {
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(petProfileService.deletePetProfile(userId, petId))
     }
 
 }
