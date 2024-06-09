@@ -25,7 +25,7 @@ class PetProfileController(
         @RequestBody createPetProfileRequestDTO: PetProfileRequestDTO
     ): ResponseEntity<PetProfileResponseDTO> {
         return ResponseEntity
-            .status(HttpStatus.OK)
+            .status(HttpStatus.CREATED)
             .body(petProfileService.createPetProfile(userId, createPetProfileRequestDTO))
     }
     @GetMapping("/{petId}")
