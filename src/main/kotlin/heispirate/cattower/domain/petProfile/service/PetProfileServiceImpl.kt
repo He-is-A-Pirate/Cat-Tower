@@ -33,8 +33,12 @@ class PetProfileServiceImpl(
         userId: Long,
         petId: Long
     ): PetProfileResponseDTO {
-        mainUserRepository.findByIdAndDeletedAtIsNull(userId) ?: throw ModelNotFoundException("user", userId)
-        val petProfile = petProfileRepository.findByIdAndDeletedAtIsNull(petId) ?: throw ModelNotFoundException("pet", petId)
+        val petProfile =
+            petProfileRepository.findByIdAndDeletedAtIsNull(petId) ?: throw ModelNotFoundException("pet", petId)
+        val mainUser = mainUserRepository.findByIdAndDeletedAtIsNull(userId) ?: throw ModelNotFoundException("user", userId)
+        if (!petProfile.disclosure && petProfile.mainUser?.id != mainUser.id) {
+                throw Exception("비공개 프로필입니다.")
+            }
         return PetProfileResponseDTO.toResponse(petProfile)
     }
 
