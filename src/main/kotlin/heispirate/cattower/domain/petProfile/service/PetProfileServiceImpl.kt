@@ -43,4 +43,29 @@ class PetProfileServiceImpl(
         val petProfiles = petProfileRepository.findAllByMainUser(mainUser)
         return petProfiles.map { PetProfileResponseDTO.toResponse(it) }
     }
+
+    @Transactional
+    override fun updatePetProfile(userId: Long, petId: Long, petProfileRequestDTO: PetProfileRequestDTO
+    ): PetProfileResponseDTO {
+        val mainUser = mainUserRepository.findByIdOrNull(userId) ?: throw ModelNotFoundException("user", userId)
+        val petProfile = petProfileRepository.findByIdOrNull(petId) ?: throw ModelNotFoundException("pet", petId)
+
+        if (petProfile.mainUser != mainUser) {
+            throw Exception("해당 유저의 펫프로필이 아닙니다.")
+        }
+        petProfile.apply { name = petProfileRequestDTO.name
+            gender = petProfileRequestDTO.gender
+            birthDay = petProfileRequestDTO.birthDay
+            age = petProfileRequestDTO.age
+            kind = petProfileRequestDTO.kind
+            address = petProfileRequestDTO.address
+            aboutMe = petProfileRequestDTO.aboutMe
+            bloodType = petProfileRequestDTO.bloodType
+            weight = petProfileRequestDTO.weight
+            healthHistory = petProfileRequestDTO.healthHistory
+            profileImageUrl = petProfileRequestDTO.profileImageUrl
+            disclosure = petProfileRequestDTO.disclosure}
+        val updatedPetProfile = petProfileRepository.save(petProfile)
+        return PetProfileResponseDTO.toResponse(updatedPetProfile)
+    }
 }
