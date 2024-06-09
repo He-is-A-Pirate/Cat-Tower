@@ -3,6 +3,7 @@ package heispirate.cattower.domain.petProfile.controller
 import heispirate.cattower.domain.petProfile.dto.PetProfileRequestDTO
 import heispirate.cattower.domain.petProfile.dto.PetProfileResponseDTO
 import heispirate.cattower.domain.petProfile.service.PetProfileService
+import io.swagger.v3.oas.annotations.Operation
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController
 class PetProfileController(
     private val petProfileService: PetProfileService
 ) {
+
+    @Operation(summary = "펫 프로필 생성", description = "사용자가 새로운 펫 프로필을 생성합니다.")
     @PostMapping()
     fun createPetProfile(
         @PathVariable userId: Long,
@@ -28,6 +31,7 @@ class PetProfileController(
             .status(HttpStatus.CREATED)
             .body(petProfileService.createPetProfile(userId, createPetProfileRequestDTO))
     }
+    @Operation(summary = "펫 프로필 조회", description = "특정 펫 프로필을 조회합니다.")
     @GetMapping("/{petId}")
     fun getPetProfile(
         @PathVariable userId: Long,
@@ -37,6 +41,8 @@ class PetProfileController(
             .status(HttpStatus.OK)
             .body(petProfileService.getPetProfile(userId, petId))
     }
+
+    @Operation(summary = "펫 프로필 목록 조회", description = "특정 사용자의 펫 프로필 목록을 조회합니다.")
     @GetMapping()
     fun getUsersPetProfileList(
         @PathVariable userId: Long
@@ -46,6 +52,7 @@ class PetProfileController(
             .body(petProfileService.getUsersPetProfileList(userId))
     }
 
+    @Operation(summary = "펫 프로필 수정", description = "특정 펫 프로필을 수정합니다.")
     @PutMapping("/{petId}")
     fun updatePetProfile(
         @PathVariable userId: Long,
@@ -57,6 +64,7 @@ class PetProfileController(
             .body(petProfileService.updatePetProfile(userId, petId, petProfileRequestDTO))
     }
 
+    @Operation(summary = "펫 프로필 삭제", description = "특정 펫 프로필을 삭제합니다.")
     @DeleteMapping("/{petId}")
     fun deletePetProfile(
         @PathVariable userId: Long,
