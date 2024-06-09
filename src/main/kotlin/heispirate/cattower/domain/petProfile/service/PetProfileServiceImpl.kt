@@ -5,7 +5,6 @@ import heispirate.cattower.domain.petProfile.dto.PetProfileRequestDTO
 import heispirate.cattower.domain.petProfile.dto.PetProfileResponseDTO
 import heispirate.cattower.domain.petProfile.repository.PetProfileRepository
 import heispirate.cattower.exception.ModelNotFoundException
-import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
@@ -20,8 +19,8 @@ class PetProfileServiceImpl(
         userId: Long,
         petProfileRequestDTO: PetProfileRequestDTO
     ): PetProfileResponseDTO {
-        val mainUser = mainUserRepository.findByIdOrNull(userId) ?: throw ModelNotFoundException("user", userId)
-        val petProfiles = petProfileRepository.findAllByMainUser(mainUser)
+        val mainUser = mainUserRepository.findByIdAndDeletedAtIsNull(userId) ?: throw ModelNotFoundException("user", userId)
+        val petProfiles = petProfileRepository.findAllByMainUserAndDeletedAtIsNull(mainUser)
         if (petProfiles.isNotEmpty() && petProfiles.size >= 3) {
             throw Exception("펫 프로필 생성은 3개를 초과할 수 없습니다.")
         }
@@ -34,22 +33,22 @@ class PetProfileServiceImpl(
         userId: Long,
         petId: Long
     ): PetProfileResponseDTO {
-        mainUserRepository.findByIdOrNull(userId) ?: throw ModelNotFoundException("user", userId)
-        val petProfile = petProfileRepository.findByIdOrNull(petId) ?: throw ModelNotFoundException("pet", petId)
+        mainUserRepository.findByIdAndDeletedAtIsNull(userId) ?: throw ModelNotFoundException("user", userId)
+        val petProfile = petProfileRepository.findByIdAndDeletedAtIsNull(petId) ?: throw ModelNotFoundException("pet", petId)
         return PetProfileResponseDTO.toResponse(petProfile)
     }
 
     override fun getUsersPetProfileList(userId: Long): List<PetProfileResponseDTO> {
-        val mainUser = mainUserRepository.findByIdOrNull(userId) ?: throw ModelNotFoundException("user", userId)
-        val petProfiles = petProfileRepository.findAllByMainUser(mainUser)
+        val mainUser = mainUserRepository.findByIdAndDeletedAtIsNull(userId) ?: throw ModelNotFoundException("user", userId)
+        val petProfiles = petProfileRepository.findAllByMainUserAndDeletedAtIsNull(mainUser)
         return petProfiles.map { PetProfileResponseDTO.toResponse(it) }
     }
 
     @Transactional
     override fun updatePetProfile(userId: Long, petId: Long, petProfileRequestDTO: PetProfileRequestDTO
     ): PetProfileResponseDTO {
-        val mainUser = mainUserRepository.findByIdOrNull(userId) ?: throw ModelNotFoundException("user", userId)
-        val petProfile = petProfileRepository.findByIdOrNull(petId) ?: throw ModelNotFoundException("pet", petId)
+        val mainUser = mainUserRepository.findByIdAndDeletedAtIsNull(userId) ?: throw ModelNotFoundException("user", userId)
+        val petProfile = petProfileRepository.findByIdAndDeletedAtIsNull(petId) ?: throw ModelNotFoundException("pet", petId)
 
         if (petProfile.mainUser != mainUser) {
             throw Exception("해당 유저의 펫프로필이 아닙니다.")
@@ -72,7 +71,7 @@ class PetProfileServiceImpl(
 
     @Transactional
     override fun deletePetProfile(userId: Long, petId: Long) {
-        val mainUser = mainUserRepository.findByIdOrNull(userId) ?: throw ModelNotFoundException("user", userId)
+        val mainUser = mainUserRepository.findByIdAndDeletedAtIsNull(userId) ?: throw ModelNotFoundException("user", userId)
         val petProfile = petProfileRepository.findByIdAndDeletedAtIsNull(petId) ?: throw ModelNotFoundException("pet", petId)
         if (petProfile.mainUser != mainUser) {
             throw Exception("해당 유저의 펫프로필이 아닙니다.")
