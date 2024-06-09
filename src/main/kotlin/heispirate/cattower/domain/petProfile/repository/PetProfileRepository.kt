@@ -7,4 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 interface PetProfileRepository : JpaRepository<PetProfile,Long> , CustomPetProfileRepository {
 
     fun findAllByMainUser(mainUser: MainUser): List<PetProfile>
+
+    fun findByIdAndDeletedAtIsNull(petId: Long): PetProfile?
 }
