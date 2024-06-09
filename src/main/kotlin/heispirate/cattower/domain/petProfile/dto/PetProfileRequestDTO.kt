@@ -4,7 +4,7 @@ import heispirate.cattower.domain.petProfile.model.Gender
 import heispirate.cattower.domain.petProfile.model.PetProfile
 import java.time.LocalDateTime
 
-data class CreatePetProfileRequestDTO(
+data class PetProfileRequestDTO(
     val name: String,
     val gender: Gender,
     val birthDay: LocalDateTime,
