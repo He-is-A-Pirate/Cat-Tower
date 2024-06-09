@@ -16,20 +16,20 @@ import java.time.LocalDateTime
 @Entity
 class PetProfile(
     @Column(name = "name")
-    val name: String,
+    var name: String,
 
     @Enumerated(EnumType.STRING)
     @Column(name = "gender")
     var gender: Gender,
 
     @Column(name = "birthDay")
-    val birthDay: LocalDateTime,
+    var birthDay: LocalDateTime,
 
     @Column(name = "age")
     var age: Int,
 
     @Column(name = "kind")
-    val kind: String?,
+    var kind: String?,
 
     @Column(name = "address")
     var address: String?,
@@ -38,7 +38,7 @@ class PetProfile(
     var aboutMe: String?,
 
     @Column(name = "bloodType")
-    val bloodType: String?,
+    var bloodType: String?,
 
     @Column(name = "weight")
     var weight: Double?,
