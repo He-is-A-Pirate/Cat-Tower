@@ -44,7 +44,7 @@ class PetProfileServiceImpl(
 
     override fun getUsersPetProfileList(userId: Long): List<PetProfileResponseDTO> {
         val mainUser = mainUserRepository.findByIdAndDeletedAtIsNull(userId) ?: throw ModelNotFoundException("user", userId)
-        val petProfiles = petProfileRepository.findAllByMainUserAndDeletedAtIsNull(mainUser)
+        val petProfiles = petProfileRepository.findAllByMainUserAndDeletedAtIsNull(mainUser).filter{it.disclosure}
         return petProfiles.map { PetProfileResponseDTO.toResponse(it) }
     }
 
