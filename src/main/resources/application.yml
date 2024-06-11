@@ -15,6 +15,22 @@ spring:
         highlight_sql: true
         use_sql_comments: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
+  mail:
+    host:
+    port:
+    username:
+    password:
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          connectiontimeout:
+          timeout:
+          writetimeout:
+  auth-code-expiration-millis:  #emailConfig 안만들어서 값 못읽음 ! 추가예정
 logging:
   level:
     org:
