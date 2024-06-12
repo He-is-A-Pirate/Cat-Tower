@@ -54,7 +54,7 @@ class PetProfile(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "main_user_id")
-    var mainUser: MainUser? = null
+    var mainUser: MainUser
 
     ) : BaseEntity() {
 
