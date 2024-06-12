@@ -1,5 +1,6 @@
 package heispirate.cattower.domain.petProfile.dto
 
+import heispirate.cattower.domain.mainUser.model.MainUser
 import heispirate.cattower.domain.petProfile.model.Gender
 import heispirate.cattower.domain.petProfile.model.PetProfile
 import java.time.LocalDateTime
@@ -18,7 +19,7 @@ data class PetProfileRequestDTO(
     val profileImageUrl: String,
     val disclosure: Boolean,
 ) {
-    fun toEntity(): PetProfile {
+    fun toEntity(mainUser: MainUser): PetProfile {
             return PetProfile(
                 name = name,
                 gender = gender,
@@ -32,6 +33,7 @@ data class PetProfileRequestDTO(
                 healthHistory = healthHistory,
                 profileImageUrl = profileImageUrl,
                 disclosure = disclosure,
+                mainUser = mainUser
             )
     }
 }
