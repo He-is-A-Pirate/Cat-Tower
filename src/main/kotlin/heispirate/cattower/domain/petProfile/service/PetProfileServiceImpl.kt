@@ -21,12 +21,12 @@ class PetProfileServiceImpl(
     ): PetProfileResponseDTO {
         val mainUser = mainUserRepository.findByIdAndDeletedAtIsNull(userId) ?: throw ModelNotFoundException("user", userId)
         val petProfiles = petProfileRepository.findAllByMainUserAndDeletedAtIsNull(mainUser)
-        if (petProfiles.isNotEmpty() && petProfiles.size >= 3) {
+        if (petProfiles.size >= 3) {
             throw Exception("펫 프로필 생성은 3개를 초과할 수 없습니다.")
         }
-        val newPetProfile = petProfileRequestDTO.toEntity().apply { this.mainUser = mainUser }
+        val newPetProfile = petProfileRequestDTO.toEntity(mainUser) // .apply { this.mainUser = mainUser }
         val savedPetProfile = petProfileRepository.save(newPetProfile)
-        mainUser.petProfiles?.add(newPetProfile)
+        // mainUser.petProfiles?.add(newPetProfile)
         return PetProfileResponseDTO.toResponse(savedPetProfile)
     }
     override fun getPetProfile(
