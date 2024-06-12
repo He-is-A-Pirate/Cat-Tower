@@ -69,8 +69,8 @@ class PetProfileServiceImpl(
             healthHistory = petProfileRequestDTO.healthHistory
             profileImageUrl = petProfileRequestDTO.profileImageUrl
             disclosure = petProfileRequestDTO.disclosure}
-        val updatedPetProfile = petProfileRepository.save(petProfile)
-        return PetProfileResponseDTO.toResponse(updatedPetProfile)
+
+        return PetProfileResponseDTO.toResponse(petProfile)
     }
 
     @Transactional
@@ -81,7 +81,6 @@ class PetProfileServiceImpl(
             throw Exception("해당 유저의 펫프로필이 아닙니다.")
         }
         petProfile.deletedAt = LocalDateTime.now()
-        petProfileRepository.save(petProfile)
 
     }
 }
