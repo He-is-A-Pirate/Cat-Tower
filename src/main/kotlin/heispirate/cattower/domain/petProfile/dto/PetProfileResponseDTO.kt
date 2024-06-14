@@ -15,7 +15,6 @@ data class PetProfileResponseDTO(
     val weight: Double?,
     val healthHistory: String?,
     val profileImageUrl: String?,
-    val disclosure: Boolean
 ) {
 
     companion object {
@@ -32,7 +31,6 @@ data class PetProfileResponseDTO(
                 weight = petProfile.weight,
                 healthHistory = petProfile.healthHistory,
                 profileImageUrl = petProfile.profileImageUrl,
-                disclosure = petProfile.disclosure,
             )
         }
     }
