@@ -17,7 +17,6 @@ data class PetProfileRequestDTO(
     val weight: Double?,
     val healthHistory: String?,
     val profileImageUrl: String,
-    val disclosure: Boolean,
 ) {
     fun toEntity(mainUser: MainUser): PetProfile {
             return PetProfile(
@@ -32,7 +31,6 @@ data class PetProfileRequestDTO(
                 weight = weight,
                 healthHistory = healthHistory,
                 profileImageUrl = profileImageUrl,
-                disclosure = disclosure,
                 mainUser = mainUser
             )
     }
