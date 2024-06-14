@@ -42,8 +42,6 @@ class MainUser(
     @Column(name = "providerId")
     val providerId: String?,
 
-    @OneToMany(mappedBy = "mainUser", cascade = [CascadeType.ALL], orphanRemoval=true, fetch = FetchType.LAZY)
-    var petProfiles: MutableList<PetProfile>? = mutableListOf()
 
     ) : BaseEntity() {
 
