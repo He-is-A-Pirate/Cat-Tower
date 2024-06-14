@@ -49,9 +49,6 @@ class PetProfile(
     @Column(name = "profileImageUrl")
     var profileImageUrl: String,
 
-    @Column(name = "disclosure")
-    var disclosure: Boolean,
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "main_user_id")
     var mainUser: MainUser
