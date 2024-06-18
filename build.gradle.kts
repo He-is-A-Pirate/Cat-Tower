@@ -68,6 +68,10 @@ dependencies {
 
     //mail
     implementation ("org.springframework.boot:spring-boot-starter-mail")
+
+    //log
+    implementation("org.slf4j:slf4j-api:1.7.32")  // SLF4J API
+    implementation("ch.qos.logback:logback-classic:1.4.12")  // Logback
 }
 
 tasks.withType<KotlinCompile> {
