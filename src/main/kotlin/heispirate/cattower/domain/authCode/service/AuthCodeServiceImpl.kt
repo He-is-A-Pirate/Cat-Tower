@@ -42,8 +42,10 @@ class AuthCodeServiceImpl(
 
 
 
-
-
+    @Transactional
+    override fun deleteAuthCode(zeroHour:LocalDateTime) {
+        authCodeRepository.deleteByExpirationTime(zeroHour)
+    }
 
 
 
