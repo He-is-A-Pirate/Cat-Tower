@@ -38,8 +38,8 @@ logging:
             bind: trace
       springframework:
         security: debug
-#coolsms:
-#  api:
-#    key: ${COOLSMS_API_KEY}
-#    secret: ${COOLSMS_API_SECRET}
-#    url: ${COOLSMS_API_URL}
+coolsms:
+  api:
+    key: ${COOLSMS_API_KEY}
+    secret: ${COOLSMS_API_SECRET}
+    url: ${COOLSMS_API_URL}
