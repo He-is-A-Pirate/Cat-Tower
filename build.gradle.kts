@@ -69,8 +69,6 @@ dependencies {
     //mail
     implementation ("org.springframework.boot:spring-boot-starter-mail")
 
-    //log
-    implementation("io.github.oshai:kotlin-logging-jvm:5.1.1")
 }
 
 tasks.withType<KotlinCompile> {
