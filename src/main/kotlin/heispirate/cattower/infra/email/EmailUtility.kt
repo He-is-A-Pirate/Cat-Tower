@@ -31,12 +31,12 @@ class EmailUtility(
                         code = randomCode,
                         expirationTime = expirationTime,
                         email = email,
-                        requestNumber = 3,
+                        requestNumber = 1,
                         available = true
                     )
                 )
             }
-            3 ->{
+            1 ->{
                 authCode.available = false
                 authRepository.save(authCode)
                 authRepository.save(
@@ -57,26 +57,14 @@ class EmailUtility(
                         code = randomCode,
                         expirationTime = expirationTime,
                         email = email,
-                        requestNumber = 1,
+                        requestNumber = 3,
                         available = true
                     )
                 )
             }
-            1 ->{
-                authCode.available = false
-                authRepository.save(authCode)
-                authRepository.save(
-                    AuthCode(
-                        code = randomCode,
-                        expirationTime = expirationTime,
-                        email = email,
-                        requestNumber = 0,
-                        available = true
-                    )
-                )
-            }
-            0 ->{
+            3 ->{
                 throw Exception ("이메일 발송 횟수 초과입니다 익일 00시 이후에 시도해주세요")
+
             }
 
         }
