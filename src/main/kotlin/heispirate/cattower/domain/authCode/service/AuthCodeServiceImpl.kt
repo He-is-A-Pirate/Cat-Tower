@@ -11,8 +11,7 @@ import org.springframework.stereotype.Service
 @Service
 class AuthCodeServiceImpl(
     private val authCodeRepository: AuthCodeRepository,
-    private val emailUtility: EmailUtility,
-    private val javaMailSender: JavaMailSender,
+    private val emailUtility: EmailUtility
 ) : AuthCodeService {
     @Transactional
     override fun sendAuthEmail(email: String): AuthResponseDTO {
