@@ -5,7 +5,6 @@ import heispirate.cattower.domain.authCode.repository.AuthCodeRepository
 import heispirate.cattower.infra.email.EmailUtility
 import jakarta.transaction.Transactional
 import java.time.LocalDateTime
-import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.stereotype.Service
 
 @Service

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component
 class AuthCodeCleaner(
     private val authCodeService: AuthCodeService,
 ) {
-    @Scheduled(cron = "0 0 * * * *")
+    @Scheduled(cron = "0 0 0 * * *")
     fun cleanAuthCode() {
         val zeroHour = LocalDateTime.now(ZoneId.of("Asia/Seoul"))
             authCodeService.deleteAuthCode(zeroHour)
