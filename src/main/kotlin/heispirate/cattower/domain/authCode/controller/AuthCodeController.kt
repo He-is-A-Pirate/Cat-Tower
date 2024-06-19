@@ -4,9 +4,7 @@ import heispirate.cattower.domain.authCode.dto.AuthResponseDTO
 import heispirate.cattower.domain.authCode.service.AuthCodeService
 import io.swagger.v3.oas.annotations.Operation
 import org.springframework.http.HttpStatus
-import org.springframework.http.HttpStatusCode
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -38,5 +36,6 @@ class AuthCodeController(
             .status(HttpStatus.OK)
             .body(authCodeService.verifyCode(email,code))
     }
+
 
 }
