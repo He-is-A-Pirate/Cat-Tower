@@ -20,7 +20,7 @@ class EmailUtility(
 
 
     private fun generateCode(email: String):String{
-        val randomCode = UUID.randomUUID().toString().replace("-","").take(6)//랜덤코드 생성
+        val randomCode = UUID.randomUUID().toString().replace("-","").take(6)
         val expirationTime = LocalDateTime.now().plusMinutes(5)
         val authCode = authRepository.findByEmailAndAvailableIsTrue(email)
 
