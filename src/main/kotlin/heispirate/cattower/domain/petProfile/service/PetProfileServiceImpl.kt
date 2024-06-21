@@ -19,7 +19,7 @@ class PetProfileServiceImpl(
         userId: Long,
         request: PetProfileRequestDTO
     ): PetProfileResponseDTO {
-        val mainUser = mainUserRepository.findByIdAndDeletedAtIsNull(userId) ?: throw ModelNotFoundException("user", userId)
+        val mainUser = validateMainUser(userId)
         val petProfiles = petProfileRepository.findAllByMainUserAndDeletedAtIsNull(mainUser)
         if (petProfiles.size >= 3) {
             throw Exception("펫 프로필 생성은 3개를 초과할 수 없습니다.")
@@ -34,7 +34,7 @@ class PetProfileServiceImpl(
         userId: Long,
         petId: Long
     ): PetProfileResponseDTO {
-        mainUserRepository.findByIdAndDeletedAtIsNull(userId) ?: throw ModelNotFoundException("user", userId)
+        validateMainUser(userId)
         val petProfile =
             petProfileRepository.findByIdAndDeletedAtIsNull(petId) ?: throw ModelNotFoundException("pet", petId)
         return PetProfileResponseDTO.toResponse(petProfile)
@@ -44,7 +44,7 @@ class PetProfileServiceImpl(
     override fun getUsersPetProfileList(
         userId: Long
     ): List<PetProfileResponseDTO> {
-        val mainUser = mainUserRepository.findByIdAndDeletedAtIsNull(userId) ?: throw ModelNotFoundException("user", userId)
+        val mainUser = validateMainUser(userId)
         val petProfiles = petProfileRepository.findAllByMainUserAndDeletedAtIsNull(mainUser)
         return petProfiles.map { PetProfileResponseDTO.toResponse(it) }
     }
@@ -52,7 +52,7 @@ class PetProfileServiceImpl(
     @Transactional
     override fun updatePetProfile(userId: Long, petId: Long, request: PetProfileRequestDTO
     ): PetProfileResponseDTO {
-        val mainUser = mainUserRepository.findByIdAndDeletedAtIsNull(userId) ?: throw ModelNotFoundException("user", userId)
+        val mainUser = validateMainUser(userId)
         val petProfile = petProfileRepository.findByIdAndDeletedAtIsNull(petId) ?: throw ModelNotFoundException("pet", petId)
 
         if (petProfile.mainUser != mainUser) {
@@ -75,7 +75,7 @@ class PetProfileServiceImpl(
 
     @Transactional
     override fun deletePetProfile(userId: Long, petId: Long) {
-        val mainUser = mainUserRepository.findByIdAndDeletedAtIsNull(userId) ?: throw ModelNotFoundException("user", userId)
+        val mainUser = validateMainUser(userId)
         val petProfile = petProfileRepository.findByIdAndDeletedAtIsNull(petId) ?: throw ModelNotFoundException("pet", petId)
         if (petProfile.mainUser != mainUser) {
             throw Exception("해당 유저의 펫프로필이 아닙니다.")
@@ -83,4 +83,6 @@ class PetProfileServiceImpl(
         petProfile.deletedAt = LocalDateTime.now()
 
     }
+    private fun validateMainUser(userId: Long) = mainUserRepository.findByIdAndDeletedAtIsNull(userId) ?: throw ModelNotFoundException("user", userId)
 }
+
