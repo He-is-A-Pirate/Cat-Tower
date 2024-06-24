@@ -21,6 +21,8 @@ class AuthCode(
     @Column(name = "requestNumber")
     var requestNumber : Int,
 
-):BaseEntity() {
+    @Column(name = "available")
+    var available: Boolean,
 
+):BaseEntity() {
 }
