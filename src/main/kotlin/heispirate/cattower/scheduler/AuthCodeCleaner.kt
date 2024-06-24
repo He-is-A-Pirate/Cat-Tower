@@ -1,4 +1,4 @@
-package heispirate.cattower.infra.email
+package heispirate.cattower.scheduler
 
 import heispirate.cattower.domain.authCode.service.AuthCodeService
 import java.time.LocalDateTime
