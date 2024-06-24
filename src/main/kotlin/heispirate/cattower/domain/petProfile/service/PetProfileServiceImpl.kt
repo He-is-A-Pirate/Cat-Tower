@@ -55,7 +55,7 @@ class PetProfileServiceImpl(
         val mainUser = validateMainUser(userId)
         val petProfile = petProfileRepository.findByIdAndDeletedAtIsNull(petId) ?: throw ModelNotFoundException("pet", petId)
 
-        if (petProfile.mainUser != mainUser) {
+        if (petProfile.mainUser.id != mainUser.id) {
             throw Exception("해당 유저의 펫프로필이 아닙니다.")
         }
         petProfile.apply { name = request.name
