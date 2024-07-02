@@ -2,6 +2,7 @@ package heispirate.cattower.domain.admin.service
 
 import heispirate.cattower.domain.admin.dto.AdminRequestDTOver1
 import heispirate.cattower.domain.admin.dto.AdminResponseDTO
+import heispirate.cattower.domain.admin.model.Role
 import heispirate.cattower.infra.category.Category
 
 interface AdminService {
@@ -11,11 +12,11 @@ interface AdminService {
 
     fun signInAdmin(request: AdminRequestDTOver1)
 
-    fun updateAdmin(email: String) : AdminResponseDTO
+    fun updateAdmin(email: String,newRole: Role) : AdminResponseDTO
 
     fun deleteAdmin(email: String) : Boolean
 
-    fun getAdmin(email: String)
+    fun getAdmin(email: String) : AdminResponseDTO
 
-    fun getAllAdmin()
+    fun getAllAdmin() : List<AdminResponseDTO>
 }

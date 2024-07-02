@@ -8,7 +8,6 @@ import heispirate.cattower.domain.admin.repository.AdminRepository
 import heispirate.cattower.domain.mainUser.repository.MainUserRepository
 import heispirate.cattower.domain.petProfile.model.PetProfile
 import heispirate.cattower.domain.post.model.Post
-import heispirate.cattower.exception.ModelNotFoundException
 import heispirate.cattower.infra.category.Category
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -48,20 +47,28 @@ class AdminServiceImpl(
         val admin = adminRepository.findByMainUserEmail(request.adminEmail) ?: throw IllegalArgumentException("이메일을 찾을수 없습니다")
     }
 
-    override fun updateAdmin(email: String): AdminResponseDTO {
-        TODO("Not yet implemented")
+    @Transactional
+    override fun updateAdmin(email: String, newRole: Role): AdminResponseDTO {
+        val admin = adminRepository.findByMainUserEmail(email) ?: throw IllegalArgumentException("이메일을 찾을수 없습니다")
+        admin.role = newRole
+        return AdminResponseDTO.fromMainUser(admin.mainUser)
     }
 
+    @Transactional
     override fun deleteAdmin(email: String): Boolean {
-        TODO("Not yet implemented")
+        val admin = adminRepository.findByMainUserEmail(email) ?: throw IllegalArgumentException("이메일을 찾을수 없습니다")
+        adminRepository.delete(admin)
+        return true
     }
 
-    override fun getAdmin(email: String) {
-        TODO("Not yet implemented")
+    override fun getAdmin(email: String): AdminResponseDTO {
+        val admin = adminRepository.findByMainUserEmail(email) ?: throw IllegalArgumentException("이메일을 찾을수 없습니다")
+        return AdminResponseDTO.fromMainUser(admin.mainUser)
     }
 
-    override fun getAllAdmin() {
-        TODO("Not yet implemented")
+    override fun getAllAdmin(): List<AdminResponseDTO> {
+        val admins = adminRepository.findAll()
+        return admins.map { admin -> AdminResponseDTO.fromMainUser(admin.mainUser) }
     }
 
     // 예시 적용을 위한 펫 프로필 확인
