@@ -43,11 +43,6 @@ class AdminServiceImpl(
     }
 
     @Transactional
-    override fun signInAdmin(request: AdminRequestDTOver1) {
-        val admin = adminRepository.findByMainUserEmail(request.adminEmail) ?: throw IllegalArgumentException("이메일을 찾을수 없습니다")
-    }
-
-    @Transactional
     override fun updateAdmin(email: String, newRole: Role): AdminResponseDTO {
         val admin = adminRepository.findByMainUserEmail(email) ?: throw IllegalArgumentException("이메일을 찾을수 없습니다")
         admin.role = newRole
