@@ -10,9 +10,9 @@ interface AdminService {
 
     fun changeUserToAdminVersion1(request: AdminRequestDTOver1): AdminResponseDTO
 
-    fun updateAdmin(email: String,newRole: Role) : AdminResponseDTO
+    fun updateAdminVersion1(request: AdminRequestDTOver1) : AdminResponseDTO
 
-    fun deleteAdmin(email: String) : Boolean
+    fun deleteAdminVersion1(request: AdminRequestDTOver1) : Boolean
 
     fun getAdmin(email: String) : AdminResponseDTO
 

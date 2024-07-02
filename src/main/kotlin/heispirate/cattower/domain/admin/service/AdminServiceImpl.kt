@@ -31,39 +31,53 @@ class AdminServiceImpl(
     override fun changeUserToAdminVersion1(request: AdminRequestDTOver1): AdminResponseDTO {
         val admin = adminRepository.findByMainUserEmail(request.adminEmail) ?: throw IllegalArgumentException("이메일을 찾을수 없습니다")
         if(admin.role == Role.ADMIN) {
-            val user = mainUserRepository.findByEmail(request.userEmail)
-            val changeToAdmin = Admin(mainUser = user!!, role = request.role)
+            val user = mainUserRepository.findByEmail(request.userEmail) ?: throw IllegalArgumentException("대상 유저를 찾을수 없습니다.")
+            val changeToAdmin = Admin(mainUser = user, role = request.role)
 
             adminRepository.save(changeToAdmin)
 
-            return AdminResponseDTO.fromMainUser(user)
+            return AdminResponseDTO.fromAdmin(changeToAdmin)
         } else {
             throw IllegalStateException("Admin이 아닙니다")
         }
     }
 
     @Transactional
-    override fun updateAdmin(email: String, newRole: Role): AdminResponseDTO {
-        val admin = adminRepository.findByMainUserEmail(email) ?: throw IllegalArgumentException("이메일을 찾을수 없습니다")
-        admin.role = newRole
-        return AdminResponseDTO.fromMainUser(admin.mainUser)
+    override fun updateAdminVersion1(request: AdminRequestDTOver1): AdminResponseDTO {
+        val admin = adminRepository.findByMainUserEmail(request.adminEmail) ?: throw IllegalArgumentException("이메일을 찾을수 없습니다")
+        if(admin.role == Role.ADMIN) {
+            val changeUser = adminRepository.findByMainUserEmail(request.userEmail) ?: throw IllegalArgumentException("대상 유저를 찾을수 없습니다.")
+            changeUser.role = request.role
+
+            return AdminResponseDTO.fromAdmin(changeUser)
+        } else {
+            throw IllegalStateException("Admin이 아닙니다")
+        }
+
     }
 
     @Transactional
-    override fun deleteAdmin(email: String): Boolean {
-        val admin = adminRepository.findByMainUserEmail(email) ?: throw IllegalArgumentException("이메일을 찾을수 없습니다")
-        adminRepository.delete(admin)
-        return true
+    override fun deleteAdminVersion1(request: AdminRequestDTOver1): Boolean {
+        val admin = adminRepository.findByMainUserEmail(request.adminEmail) ?: throw IllegalArgumentException("이메일을 찾을수 없습니다")
+        if (admin.role == Role.ADMIN) {
+            val deleteUser = adminRepository.findByMainUserEmail(request.userEmail) ?: throw IllegalArgumentException("삭제할 유저를 찾을수 없습니다.")
+            adminRepository.delete(deleteUser)
+            return true
+        } else {
+            throw IllegalStateException("Admin이 아닙니다")
+        }
     }
 
+    @Transactional
     override fun getAdmin(email: String): AdminResponseDTO {
         val admin = adminRepository.findByMainUserEmail(email) ?: throw IllegalArgumentException("이메일을 찾을수 없습니다")
-        return AdminResponseDTO.fromMainUser(admin.mainUser)
+        return AdminResponseDTO.fromAdmin(admin)
     }
 
+    @Transactional
     override fun getAllAdmin(): List<AdminResponseDTO> {
         val admins = adminRepository.findAll()
-        return admins.map { admin -> AdminResponseDTO.fromMainUser(admin.mainUser) }
+        return admins.map { admin -> AdminResponseDTO.fromAdmin(admin) }
     }
 
     // 예시 적용을 위한 펫 프로필 확인
