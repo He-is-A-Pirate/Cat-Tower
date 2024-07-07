@@ -16,45 +16,42 @@ import java.time.LocalDateTime
 @Entity
 class PetProfile(
     @Column(name = "name")
-    val name : String,
+    var name: String,
 
     @Enumerated(EnumType.STRING)
     @Column(name = "gender")
     var gender: Gender,
 
     @Column(name = "birthDay")
-    val birthDay : LocalDateTime,
+    var birthDay: LocalDateTime,
 
     @Column(name = "age")
-    var age : Int,
+    var age: Int,
 
     @Column(name = "kind")
-    val kind : String?,
+    var kind: String?,
 
     @Column(name = "address")
-    var address : String?,
+    var address: String?,
 
     @Column(name = "aboutMe")
-    var aboutMe: String,
+    var aboutMe: String?,
 
     @Column(name = "bloodType")
-    val bloodType : String?,
+    var bloodType: String?,
 
     @Column(name = "weight")
-    var weight : Double?,
+    var weight: Double?,
 
     @Column(name = "healthHistory")
-    var healthHistory : String?,
+    var healthHistory: String?,
 
     @Column(name = "profileImageUrl")
-    var profileImageUrl : String,
-
-    @Column(name = "disclosure")
-    var disclosure : Boolean,
+    var profileImageUrl: String,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "mainUserId")
-    val mainUser: MainUser,
+    @JoinColumn(name = "main_user_id")
+    var mainUser: MainUser
 
     ) : BaseEntity() {
 

@@ -1,8 +1,12 @@
 package heispirate.cattower.domain.mainUser.model
 
+import heispirate.cattower.domain.petProfile.model.PetProfile
 import heispirate.cattower.infra.BaseEntity
+import jakarta.persistence.CascadeType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
+import jakarta.persistence.FetchType
+import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
 
 @Table(name = "mainUser")
@@ -37,6 +41,7 @@ class MainUser(
 
     @Column(name = "providerId")
     val providerId: String?,
+
 
     ) : BaseEntity() {
 
