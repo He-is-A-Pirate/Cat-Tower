@@ -2,6 +2,7 @@ package heispirate.cattower.domain.sms.service
 
 import heispirate.cattower.domain.sms.model.SMS
 import heispirate.cattower.domain.sms.repository.SMSRepository
+import kotlin.random.Random
 import net.nurigo.sdk.message.model.Message
 import net.nurigo.sdk.message.request.SingleMessageSendingRequest
 import net.nurigo.sdk.message.response.SingleMessageSentResponse
@@ -32,5 +33,11 @@ class SMSServiceImpl(
         }
 
         return response
+    }
+
+    override fun sendVerificationCode(to: String): SingleMessageSentResponse? {
+        val verificationCode = Random.nextInt(100000, 999999).toString()
+        val messageText = "인증 코드는 [$verificationCode]입니다"
+        return sendOne(to, messageText)
     }
 }
