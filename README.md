@@ -49,3 +49,16 @@
 https://www.notion.so/35405f18eb434ff592ee3a5027beb903
 
 ---
+
+
+# Built With
+
+[이 율](https://github.com/dyorcat) - 펫프로필, 이미지업로드, 좋아요, 채팅
+
+[김선병](https://github.com/Karox1234) - 관리자, 글 / 댓글 / 대댓글, 레벨 로직, 메세지전송
+
+[김보성](https://github.com/96KimBoseong)  - 메인유저, 소셜유저, 인증코드(이메일), 욕설필터 
+
+ 
+
+---
