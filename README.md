@@ -5,7 +5,7 @@
 # Introduction
 
 반려동물(우선은 고양이)을 자유롭게 뽐내고 소통하는 커뮤니티를 만들자. 
-개발 기간 : 2024.04.08 ~ 현재진행중
+개발 기간 : 2024.04.12 ~ 현재진행중
 
 ---
 # Service Architecture
@@ -44,3 +44,7 @@
 ---
 
 # Policy
+
+https://www.notion.so/35405f18eb434ff592ee3a5027beb903
+
+---
