@@ -3,6 +3,7 @@ package heispirate.cattower.domain.authCode.service
 import heispirate.cattower.domain.authCode.dto.AuthResponseDTO
 import heispirate.cattower.domain.authCode.model.AuthCode
 import heispirate.cattower.domain.authCode.repository.AuthCodeRepository
+import heispirate.cattower.infra.email.EmailService
 import heispirate.cattower.infra.email.EmailUtility
 import jakarta.transaction.Transactional
 import java.time.LocalDateTime
@@ -13,12 +14,12 @@ import org.springframework.stereotype.Service
 @Service
 class AuthCodeServiceImpl(
     private val authCodeRepository: AuthCodeRepository,
-    private val emailUtility: EmailUtility
+    private val emailService: EmailService
 ) : AuthCodeService {
     @Transactional
     override fun sendAuthEmail(email: String): AuthResponseDTO {
         val randomCode = generateCode(email)
-        emailUtility.sendEmail(
+        emailService.sendEmail(
             email = email,
             subject = "캣타워 인증 코드 입니다",
             text = "인증코드 : $randomCode"
