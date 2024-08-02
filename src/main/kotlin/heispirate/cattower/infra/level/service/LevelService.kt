@@ -1,6 +1,6 @@
-package heispirate.cattower.domain.level.service
+package heispirate.cattower.infra.level.service
 
-import heispirate.cattower.domain.level.dto.LevelResponseDTO
+import heispirate.cattower.infra.level.dto.LevelResponseDTO
 
 interface LevelService {
 

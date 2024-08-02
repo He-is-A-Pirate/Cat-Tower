@@ -1,7 +1,7 @@
 package heispirate.cattower.levelTest
 
 
-import heispirate.cattower.domain.level.service.LevelServiceImpl
+import heispirate.cattower.infra.level.service.LevelServiceImpl
 import heispirate.cattower.domain.mainUser.model.MainUser
 import heispirate.cattower.domain.mainUser.repository.MainUserRepository
 import io.kotest.matchers.shouldBe

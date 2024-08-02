@@ -1,7 +1,7 @@
-package heispirate.cattower.domain.level.service
+package heispirate.cattower.infra.level.service
 
-import heispirate.cattower.domain.level.dto.ExperienceDTO
-import heispirate.cattower.domain.level.dto.LevelResponseDTO
+import heispirate.cattower.infra.level.dto.ExperienceDTO
+import heispirate.cattower.infra.level.dto.LevelResponseDTO
 import heispirate.cattower.domain.mainUser.model.MainUser
 import heispirate.cattower.domain.mainUser.repository.MainUserRepository
 import heispirate.cattower.exception.ModelNotFoundException
