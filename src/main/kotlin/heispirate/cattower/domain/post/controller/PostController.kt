@@ -25,7 +25,7 @@ class PostController(
 
     @Operation(summary = "글 생성", description = "사용자가 새로운 글을 생성 합니다.")
     @PostMapping("/{userId}/petProfile/{petProfileId}")
-    fun createPost(
+    fun createPostV1(
         @PathVariable userId: Long,
         @PathVariable petProfileId: Long,
         @RequestBody request: PostRequestDTOv1
