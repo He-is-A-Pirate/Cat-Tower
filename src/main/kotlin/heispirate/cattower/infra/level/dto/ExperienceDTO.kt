@@ -1,4 +1,4 @@
-package heispirate.cattower.domain.level.dto
+package heispirate.cattower.infra.level.dto
 
 import heispirate.cattower.domain.mainUser.model.MainUser
 
