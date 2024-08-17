@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 
 @Component
-class SchedulerService(
+class AuthCodeScheduler(
     private val authCodeService: AuthCodeService,
 ){
     @Scheduled(cron = "0 0 0 * * *")
