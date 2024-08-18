@@ -12,7 +12,7 @@ interface AuthCodeRepository : JpaRepository<AuthCode,Long> , CustomAuthCodeRepo
 
     @Modifying
     @Query("DELETE FROM AuthCode a WHERE a.expirationTime < :zeroHour")
-    fun deleteByExpirationTime(zeroHour:LocalDateTime): Int
+    fun deleteByExpirationTime(zeroHour:LocalDateTime)
 
 
 }

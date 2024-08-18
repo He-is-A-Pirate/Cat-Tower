@@ -7,12 +7,13 @@ import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 
 @Component
-class AuthCodeCleaner(
+class AuthCodeScheduler(
     private val authCodeService: AuthCodeService,
-) {
+){
     @Scheduled(cron = "0 0 0 * * *")
     fun cleanAuthCode() {
         val zeroHour = LocalDateTime.now(ZoneId.of("Asia/Seoul"))
             authCodeService.deleteAuthCode(zeroHour)
     }
+
 }
